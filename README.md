@@ -1,4 +1,4 @@
-# SIP_c_learning
+# SIP_learning
 
 ```c
 int main(int argc, char **argv){
@@ -7,4 +7,4 @@ int main(int argc, char **argv){
 ```
 
 This is a project I created for my friends.
-They want to learn C/C++ programming language.
+They want to learn programming .
