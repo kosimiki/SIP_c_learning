@@ -5,45 +5,39 @@
 	$mail_column="email";
 	$sex_column="sex";
 	$birth_column="date_of_birth";
+	
 	switch ($_POST["col"])
 	{
 		case "usernameid":
-		check_if_exist($username_column,$_POST["text"]);
-		not_empty($_POST["text"]);
+		check_if_exist_or_empty($username_column,$_POST["text"]);
+		
 		break;
 		case "passid":
-		check_if_exist($username_column,$_POST["text"]);
-		not_empty($_POST["text"]);
+		check_if_exist_or_empty($pass_column,$_POST["text"]);
+		
 		break;
 		case "fullnameid":
-		not_empty($_POST["text"]);
+		
 		break;
 		case "mailid":
-		check_if_exist($username_column,$_POST["text"]);
-		not_empty($_POST["text"]);
+		check_if_exist_or_empty($mail_column,$_POST["text"]);
+		email_validation($_POST["text"]);
+		
 		break;
 		case "dateid":
-		not_empty($_POST["text"]);
+		
 		break;	
 	}
-	
-	
-	
-function not_empty($incomeing_data)
+function email_validation($incomeing_data)
 {
-	if ($incomeing_data != "")
-		{
-        echo "";
-		}
+	$pattern = "/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,})$/";
+	if (preg_match($pattern,$incomeing_data))
+		echo '<div style="color:green"> ✔ email address is valid </div>';
 	else 
-		{
-		echo "✘ Field is empty";
-        }
-}
-	
+		echo '<div style="color:red"> ✘ invalid email address </div>';
+}		
 
-
-function check_if_exist($column_name,$incomeing_data){
+function check_if_exist_or_empty($column_name,$incomeing_data){
 	try {		 
 		$servername = "sql7.freemysqlhosting.net";
 		$dbname= "sql7134314";
@@ -61,16 +55,17 @@ function check_if_exist($column_name,$incomeing_data){
 		$stmt -> execute();
 		$result = $stmt ->fetchAll();
 		
+		
 		if (sizeof($result)>0)
-		{	
-	
-			echo "✘".$column_name." alredy in use";
+		{		
+			echo '<div style="color:red"> ✘'.$incomeing_data.' alredy in use </div>';
 		}
         else if($incomeing_data=="")
-			echo "";
-		else
-			echo "✔";
+			echo '<div style="color:red"> ✘ Field is empty  </div>';
+		else 
+			echo '<div style="color:green"> ✔ unused </div>';
 		}
+
 	catch(PDOException $e)
     {
 		echo "Connection failed: " . $e->getMessage();
