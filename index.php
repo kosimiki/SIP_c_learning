@@ -7,12 +7,13 @@
 
 
 
-<form action="login.php" method="post" >
-Username: <input type="text" name="username" onkeyup="Bemenet(this.value,'usernameid')"> <div id="usernameid"></div><br> 
-
-Password: <input type="text" name="pass" onkeyup="Bemenet(this.value,'passid')"> <div id="passid"></div><br>
-<input type="Login">
-
+<form action="logvalidation.php" method="post" >
+Username: <input type="text" name="username"> <div id="usernameid"></div><br> 
+Password: <input type="text" name="password"> <div id="passid"></div><br>
+<button>Login</button>
 </form>
+<br/>
+<button onclick="window.location.href='/reg_view.php'">Registration</button>
+
 </body>
 </html>
